@@ -1,4 +1,6 @@
 <?php
+	# This file is left in for now to give backend people guidance.
+	
 	$inData = getRequestInfo();
 	
 	$color = $inData["color"];
