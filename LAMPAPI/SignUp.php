@@ -13,10 +13,10 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("INSERT " . $inData["ID"] . "," . $inData["firstName"] . "," . $inData["lastName"] . "," . $inData["login"] . "," . $inData["password"] . " INTO Users");
+		$stmt = $conn->prepare("INSERT INTO Users (Firstname,Lastname,Username,Password) VALUES " . $inData["firstName"] . "," . $inData["lastName"] . "," . $inData["username"] . "," . $inData["password"] . ");");
 
         # Use the super-user when creating new users
-		$stmt->bind_param("ss", $inData["super-login"], $inData["super-password"]);
+		$stmt->bind_param("ss", $inData["super-username"], $inData["super-password"]);
 
 		$stmt->execute();
 		$result = $stmt->get_result();
@@ -24,8 +24,8 @@
         $stmt->close()
 
         # Check that sign-up was successful
-        $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+        $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Username=? AND Password =?");
+		$stmt->bind_param("ss", $inData["username"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
