@@ -6,14 +6,19 @@ CREATE TABLE IF NOT EXISTS `leinecke_COP4331`.`Users` (
     `LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
     `Username` VARCHAR(50) NOT NULL DEFAULT '' ,
     `Password` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `Email` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `Phone` VARCHAR(50) NOT NULL DEFAULT '' ,
     PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `leinecke_COP4331`.`Contacts` (
-    `SourceID` INT NOT NULL DEFAULT '' ,
-    `Name` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `UserID` INT NOT NULL DEFAULT '0' ,
-    PRIMARY KEY (`ID`)
+    `LinkID` INT NOT NULL AUTO_INCREMENT ,
+    `SourceUserID` INT NOT NULL DEFAULT '' ,
+    `ContactUserID` INT NOT NULL DEFAULT '' ,
+    `ContactUsername` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `ContactUserEmail` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `ContactUserPhone` VARCHAR(50) NOT NULL DEFAULT '' ,
+    PRIMARY KEY (`LinkID`)
 ) ENGINE = InnoDB;
 
 INSERT INTO Users (FirstName,LastName,Username,Password) VALUES ('Rick','Leinecker','RickL','COP4331');

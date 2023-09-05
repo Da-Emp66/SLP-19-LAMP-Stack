@@ -13,7 +13,7 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("INSERT INTO Users (Firstname,Lastname,Username,Password) VALUES " . $inData["firstName"] . "," . $inData["lastName"] . "," . $inData["username"] . "," . $inData["password"] . ");");
+		$stmt = $conn->prepare("INSERT INTO Users (Firstname,Lastname,Username,Password) VALUES (" . $inData["firstName"] . "," . $inData["lastName"] . "," . $inData["username"] . "," . $inData["password"] . ");");
 
         # Use the super-user when creating new users
 		$stmt->bind_param("ss", $inData["super-username"], $inData["super-password"]);
