@@ -14,8 +14,9 @@ CREATE TABLE IF NOT EXISTS `leinecke_COP4331`.`Users` (
 CREATE TABLE IF NOT EXISTS `leinecke_COP4331`.`Contacts` (
     `LinkID` INT NOT NULL AUTO_INCREMENT ,
     `SourceUserID` INT NOT NULL DEFAULT '' ,
-    `ContactUserID` INT NOT NULL DEFAULT '' ,
     `ContactUsername` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `ContactUserFirstName` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `ContactUserLastName` VARCHAR(50) NOT NULL DEFAULT '' ,
     `ContactUserEmail` VARCHAR(50) NOT NULL DEFAULT '' ,
     `ContactUserPhone` VARCHAR(50) NOT NULL DEFAULT '' ,
     PRIMARY KEY (`LinkID`)
