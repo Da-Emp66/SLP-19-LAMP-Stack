@@ -11,12 +11,13 @@
 	}
 	else
 	{
-        $stmt = $conn->prepare("DELETE FROM Contacts WHERE SourceUserID = " . $inData["ID"] . " AND ContactUsername = " . $inData["contactUsername"] . " AND ContactUserFirstName = " . $inData["contactUserFirstName"] . " AND ContactUserLastName = " . $inData["contactUserLastName"] . " AND ContactUserEmail = " . $inData["contactUserEmail"] . " AND ContactUserPhone = " . $inData["contactUserPhone"] . ";");
-		$stmt->bind_param("ss", $inData["username"], $inData["password"]);
+        $stmt = $conn->prepare("DELETE FROM Contacts WHERE SourceUserID = ? AND ContactUsername = ? AND ContactUserFirstName = ? AND ContactUserLastName = ? AND ContactUserEmail = ? AND ContactUserPhone = ?;");
+		$stmt->bind_param("ss", $inData["ID"], $inData["contactUsername"], $inData["contactUserFirstName"], $inData["contactUserLastName"], $inData["contactUserEmail"], $inData["contactUserPhone"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
-		$stmt = $conn->prepare("INSERT INTO Contacts (SourceUserID,ContactUsername,ContactUserFirstName,ContactUserLastName,ContactUserEmail,ContactUserPhone) VALUES (" . $inData["ID"] . "," . $inData["newContactUsername"] . "," . $inData["newContactUserFirstName"] . "," . $inData["newContactUserLastName"] . "," . $inData["newContactUserEmail"] . "," . $inData["newContactUserPhone"]");");
-		$stmt->bind_param("ss", $inData["username"], $inData["password"]);
+		$stmt->close();
+		$stmt = $conn->prepare("INSERT INTO Contacts (SourceUserID,ContactUsername,ContactUserFirstName,ContactUserLastName,ContactUserEmail,ContactUserPhone) VALUES (?,?,?,?,?,?);");
+		$stmt->bind_param("ss", $inData["ID"], $inData["newContactUsername"], $inData["newContactUserFirstName"], $inData["newContactUserLastName"], $inData["newContactUserEmail"], $inData["newContactUserPhone"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$stmt->close();

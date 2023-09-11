@@ -11,8 +11,8 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("INSERT INTO Contacts (SourceUserID,ContactUsername,ContactUserFirstName,ContactUserLastName,ContactUserEmail,ContactUserPhone) VALUES (" . $inData["ID"] . "," . $inData["contactUsername"] . "," . $inData["contactUserFirstName"] . "," . $inData["contactUserLastName"] . "," . $inData["contactUserEmail"] . "," . $inData["contactUserPhone"]");");
-		$stmt->bind_param("ss", $inData["username"], $inData["password"]);
+		$stmt = $conn->prepare("INSERT INTO Contacts (SourceUserID,ContactUsername,ContactUserFirstName,ContactUserLastName,ContactUserEmail,ContactUserPhone) VALUES (?,?,?,?,?,?);");
+		$stmt->bind_param("ss", $inData["ID"], $inData["contactUsername"], $inData["contactUserFirstName"], $inData["contactUserLastName"], $inData["contactUserEmail"], $inData["contactUserPhone"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$stmt->close();
