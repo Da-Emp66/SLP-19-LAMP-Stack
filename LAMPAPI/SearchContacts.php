@@ -1,4 +1,7 @@
 <?php
+	
+	require __DIR__ . '/HelperFunctions.php';
+
 	$inData = getRequestInfo();
 	
 	$searchResults = "";

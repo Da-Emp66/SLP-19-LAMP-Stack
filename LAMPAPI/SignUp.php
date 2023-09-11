@@ -1,5 +1,7 @@
 <?php
 
+	require __DIR__ . '/HelperFunctions.php';
+
     $inData = getRequestInfo();
 
 	$id = 0;
