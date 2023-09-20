@@ -14,10 +14,19 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT ContactUsername FROM CONTACTS WHERE (ContactUsername LIKE ? OR ContactUserFirstName LIKE ? OR ContactUserLastName LIKE ? OR ContactUserEmail LIKE ? OR ContactUserPhone LIKE ?) AND UserID = ?;");
 		$searchCriteria = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $inData["ID"]);
-		$stmt->execute();
+		$stmt;
+
+		if ($searchCriteria == "%%")
+		{
+			$stmt = $conn->prepare("SELECT * FROM CONTACTS;");
+		}
+		else
+		{
+			$stmt = $conn->prepare("SELECT * FROM CONTACTS WHERE (ContactUsername LIKE ? OR ContactUserFirstName LIKE ? OR ContactUserLastName LIKE ? OR ContactUserEmail LIKE ? OR ContactUserPhone LIKE ?) AND UserID = ?;");
+			$stmt->bind_param("ss", $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $inData["ID"]);
+			$stmt->execute();
+		}
 		
 		$result = $stmt->get_result();
 		

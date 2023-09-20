@@ -19,7 +19,7 @@
 		$stmt->bind_param("ss", $inData["firstName"], $inData["lastName"], $inData["username"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
-        $stmt->close()
+        $stmt->close();
 
         # Check that sign-up was successful
         $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Username=? AND Password =?");
