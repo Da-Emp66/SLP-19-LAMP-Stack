@@ -4,7 +4,7 @@
 
 	$inData = getRequestInfo();
 	
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
+	$conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19"); 	
 	if( $conn->connect_error )
 	{
 		returnWithFirstnameLastnameError( $conn->connect_error );
