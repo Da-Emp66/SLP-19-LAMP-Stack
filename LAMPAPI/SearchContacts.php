@@ -34,10 +34,10 @@
 		{
 			if( $searchCount > 0 )
 			{
-				$searchResults .= ";";
+				$searchResults .= "\n";
 			}
 			$searchCount++;
-			$searchResults .= '"' . $row["ContactUsername"] . '"';
+			$searchResults .= '"' . $row["ContactUsername"] . "," . $row["ContactUserFirstName"] . "," . $row["ContactUserLastName"] . "," . $row["ContactUserEmail"] . "," . $row["ContactUserPhone"] . '"';
 		}
 		
 		if( $searchCount == 0 )
