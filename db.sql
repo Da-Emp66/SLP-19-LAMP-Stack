@@ -24,8 +24,10 @@ CREATE TABLE COP4331_SLP19.Contacts (
     PRIMARY KEY (LinkID)
 );
 
-CREATE USER 'asher'@'localhost' IDENTIFIED BY 'AmazingPassword2789';
-GRANT ALL PRIVILEGES ON COP4331_SLP19.* TO 'asher'@'localhost' WITH GRANT OPTION;
+CREATE USER 'agibson'@'localhost' IDENTIFIED BY 'AmazingPassword2789';
+GRANT ALL PRIVILEGES ON COP4331_SLP19.* TO 'agibson'@'localhost' WITH GRANT OPTION;
+CREATE USER 'rgiunta'@'localhost' IDENTIFIED BY 'DBPass3573';
+GRANT ALL PRIVILEGES ON COP4331_SLP19.* TO 'rgiunta'@'localhost' WITH GRANT OPTION;
 
 -- INSERT INTO Users (FirstName,LastName,Username,Pass) VALUES ('Rick','Leinecker','RickL','COP4331');
 -- INSERT INTO Users (FirstName,LastName,Username,Pass) VALUES ('Sam','Hill','SamH','Test');
