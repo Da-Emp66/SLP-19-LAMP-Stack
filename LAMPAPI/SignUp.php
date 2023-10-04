@@ -22,14 +22,14 @@
         $stmt->close();
 
         # Check that sign-up was successful
-        $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Username=? AND Password =?");
-		$stmt->bind_param("ss", $inData["username"], $inData["password"]);
+        $stmt = $conn->prepare("SELECT ID,FullName FROM Users WHERE name=? AND Password =?");
+		$stmt->bind_param("ss", $inData["email"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
 		if( $row = $result->fetch_assoc()  )
 		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			returnWithInfo( $row['name'], $row['email'], $row['ID'] );
 		}
 		else
 		{
