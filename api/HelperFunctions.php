@@ -1,9 +1,21 @@
 <?php
 
-    function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
+	function getRequestInfo() {
+		$rawData = file_get_contents("php://input");
+		
+		if ($rawData === false) {
+			die("Failed to read request data.");
+		}
+		
+		$requestData = json_decode($rawData, true);
+		
+		if ($requestData === null) {
+			die("Failed to decode JSON data.");
+		}
+		
+		return $requestData;
 	}
+
 
 	function sendResultInfoAsJson( $obj )
 	{
