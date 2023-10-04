@@ -5,8 +5,8 @@
     $inData = getRequestInfo();
 
 	$id = 0;
-	$firstName = "";
-	$lastName = "";
+	$name;
+	$email;
 
 	$conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19"); 	
 	if( $conn->connect_error )
@@ -15,8 +15,8 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("INSERT INTO Users (Firstname,Lastname,Username,Password) VALUES (?,?,?,?);");
-		$stmt->bind_param("ss", $inData["firstName"], $inData["lastName"], $inData["username"], $inData["password"]);
+		$stmt = $conn->prepare("INSERT INTO Users (name,email,password) VALUES (?,?,?);");
+		$stmt->bind_param("ss", $inData["name"], $inData["email"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
         $stmt->close();
