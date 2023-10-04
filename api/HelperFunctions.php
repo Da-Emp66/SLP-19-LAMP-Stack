@@ -11,11 +11,10 @@
 		echo $obj;
 	}
 	
-	function returnWithError( $err )
-	{
-		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
+	function returnWithError($message) {
+		$response = array("error" => $message);
+		echo json_encode($response);
+	}	
 
 	function returnWithFirstnameLastnameError( $err )
 	{
@@ -27,6 +26,22 @@
 	{
 		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendResultInfoAsJson( $retValue );
+	}
+
+	// very basic session token generator
+	function generateSessionToken($len=16)
+	{
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+		$token = '';
+		$characterCount = strlen($characters);
+
+		// Generate a random session token of the specified length
+		for ($i = 0; $i < $len; $i++) {
+			$token .= $characters[rand(0, $characterCount - 1)];
+		}
+
+		return $token;
 	}
 
 ?>

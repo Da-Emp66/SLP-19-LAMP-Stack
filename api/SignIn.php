@@ -5,8 +5,8 @@
 	$inData = getRequestInfo();
 	
 	$id = 0;
-	$firstName = "";
-	$lastName = "";
+	$name = "";
+	$email = "";
 
 	$conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19"); 	
 	if( $conn->connect_error )
@@ -15,14 +15,14 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Username=? AND Password =?");
-		$stmt->bind_param("ss", $inData["username"], $inData["password"]);
+		$stmt = $conn->prepare("SELECT ID,Email FROM Users WHERE Email =? AND Password =?");
+		$stmt->bind_param("ss", $inData["email"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
 		if( $row = $result->fetch_assoc()  )
 		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			returnWithInfo( $row['FullName'], $row['Email'], $row['ID'] );
 		}
 		else
 		{
