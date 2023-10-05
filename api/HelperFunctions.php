@@ -10,7 +10,7 @@
 		$requestData = json_decode($rawData, true);
 		
 		if ($requestData === null) {
-			die("Failed to decode JSON data.");
+			die("Failed to decode JSON data." . json_last_error_msg());
 		}
 		
 		return $requestData;
@@ -20,10 +20,11 @@
 	function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-		echo $obj;
+		echo json_encode($obj);
 	}
 	
 	function returnWithError($message) {
+		http_response_code(404);
 		$response = array("error" => $message);
 		echo json_encode($response);
 	}	
@@ -53,7 +54,9 @@
 			$token .= $characters[rand(0, $characterCount - 1)];
 		}
 
-		return $token;
+		$retValue = array("sessionToken"=>$token);
+
+		return json_encode($retValue);
 	}
 
 ?>
