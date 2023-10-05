@@ -1,13 +1,17 @@
 <?php
 	
+	header("Access-Control-Allow-Origin: http://localhost:3000");
+	header("Access-Control-Allow-Methods: POST, OPTIONS");
+	header("Access-Control-Allow-Headers: Content-Type, Session-Token");
+
 	require __DIR__ . '/HelperFunctions.php';
 
 	$inData = getRequestInfo();
 	
-	$searchResults = "";
+	$searchResults = array();
 	$searchCount = 0;
 
-	$conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19");
+	$conn = new mysqli("localhost", "pandasaur", "izanagi", "COP4331_SLP19");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
@@ -16,15 +20,18 @@
 	{
 		$searchCriteria = "%" . $inData["search"] . "%";
 		$stmt;
+		$sourceEmail = isset($_SERVER["HTTP_SESSION_TOKEN"]) ? $_SERVER["HTTP_SESSION_TOKEN"] : '';
 
 		if ($searchCriteria == "%%")
 		{
-			$stmt = $conn->prepare("SELECT * FROM CONTACTS;");
+			$stmt = $conn->prepare("SELECT * FROM Contacts WHERE SourceUserEmail =?;");
+			$stmt->bind_param("s", $sourceEmail);
+			$stmt->execute();
 		}
 		else
 		{
-			$stmt = $conn->prepare("SELECT * FROM CONTACTS WHERE (ContactUsername LIKE ? OR ContactUserFirstName LIKE ? OR ContactUserLastName LIKE ? OR ContactUserEmail LIKE ? OR ContactUserPhone LIKE ?) AND UserID = ?;");
-			$stmt->bind_param("ss", $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $inData["ID"]);
+			$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (ContactUsername LIKE ? OR ContactFirstName LIKE ? OR ContactLastName LIKE ? OR ContactEmail LIKE ? OR ContactPhone LIKE ?) AND SourceUserEmail =?;");
+			$stmt->bind_param("ssssss", $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $sourceEmail);
 			$stmt->execute();
 		}
 		
@@ -32,12 +39,17 @@
 		
 		while($row = $result->fetch_assoc())
 		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= "\n";
-			}
+			$indData = array(
+				"username"		=> $row["ContactUsername"],
+				"firstName"		=> $row["ContactFirstName"],
+				"lastName"		=> $row["ContactLastName"],
+				"email"			=> $row["ContactEmail"],
+				"phoneNumber"	=> $row["ContactPhone"]
+			);
+
+			$searchResults[] = $indData;
 			$searchCount++;
-			$searchResults .= '"' . $row["ContactUsername"] . "," . $row["ContactUserFirstName"] . "," . $row["ContactUserLastName"] . "," . $row["ContactUserEmail"] . "," . $row["ContactUserPhone"] . '"';
+
 		}
 		
 		if( $searchCount == 0 )
@@ -46,7 +58,7 @@
 		}
 		else
 		{
-			returnWithInfo( $searchResults );
+			echo json_encode($searchResults);
 		}
 		
 		$stmt->close();
