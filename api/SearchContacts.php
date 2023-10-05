@@ -1,12 +1,12 @@
 <?php
 	
 	header("Access-Control-Allow-Origin: http://localhost:3000");
-	header("Access-Control-Allow-Methods: POST, OPTIONS");
+	header("Access-Control-Allow-Methods: GET, OPTIONS");
 	header("Access-Control-Allow-Headers: Content-Type, Session-Token");
 
 	require __DIR__ . '/HelperFunctions.php';
 
-	$inData = getRequestInfo();
+	$inData = isset($_GET["search"]) ? $_GET["search"] : '';
 	
 	$searchResults = array();
 	$searchCount = 0;
@@ -18,7 +18,7 @@
 	} 
 	else
 	{
-		$searchCriteria = "%" . $inData["search"] . "%";
+		$searchCriteria = "%" . $inData . "%";
 		$stmt;
 		$sourceEmail = isset($_SERVER["HTTP_SESSION_TOKEN"]) ? $_SERVER["HTTP_SESSION_TOKEN"] : '';
 
