@@ -13,7 +13,7 @@ $id = 0;
 $name = "";
 $email = "";
 
-$conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19");
+$conn = new mysqli("localhost", "pandasaur", "izanagi", "COP4331_SLP19");
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
@@ -27,7 +27,7 @@ if ($conn->connect_error) {
         $stmt->close();
 
         // Generate a session token
-        $sessionToken = generateSessionToken();
+        $sessionToken = generateSessionToken($inData["email"]);
 
         // Send the session token as a response to the client
         echo $sessionToken;

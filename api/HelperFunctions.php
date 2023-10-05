@@ -41,20 +41,9 @@
 		sendResultInfoAsJson( $retValue );
 	}
 
-	// very basic session token generator
-	function generateSessionToken($len=16)
+	function generateSessionToken($email)
 	{
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-		$token = '';
-		$characterCount = strlen($characters);
-
-		// Generate a random session token of the specified length
-		for ($i = 0; $i < $len; $i++) {
-			$token .= $characters[rand(0, $characterCount - 1)];
-		}
-
-		$retValue = array("sessionToken"=>$token);
+		$retValue = array("sessionToken"=>$email);
 
 		return json_encode($retValue);
 	}
