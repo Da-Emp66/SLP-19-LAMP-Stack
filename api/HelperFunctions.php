@@ -20,7 +20,7 @@
 	function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-		echo json_encode($obj);
+		echo $obj;
 	}
 	
 	function returnWithError($message) {
