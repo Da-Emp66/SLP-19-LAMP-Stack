@@ -12,13 +12,13 @@ CREATE TABLE COP4331_SLP19.Users (
 
 CREATE TABLE COP4331_SLP19.Contacts (
     LinkID INT NOT NULL AUTO_INCREMENT ,
-    SourceUserID INT NOT NULL DEFAULT 0 ,
     ContactUsername VARCHAR(50) NOT NULL DEFAULT '' ,
-    ContactUserFirstName VARCHAR(50) NOT NULL DEFAULT '' ,
-    ContactUserLastName VARCHAR(50) NOT NULL DEFAULT '' ,
-    ContactUserEmail VARCHAR(50) NOT NULL DEFAULT '' ,
-    ContactUserPhone VARCHAR(50) NOT NULL DEFAULT '' ,
-    PRIMARY KEY (LinkID)
+    ContactFirstName VARCHAR(50) NOT NULL DEFAULT '' ,
+    ContactLastName VARCHAR(50) NOT NULL DEFAULT '' ,
+    ContactEmail VARCHAR(50) NOT NULL DEFAULT '' ,
+    ContactPhone VARCHAR(50) NOT NULL DEFAULT '' ,
+    SourceUserEmail INT NOT NULL DEFAULT 0 ,
+    PRIMARY KEY (SourceUserEmail)
 );
 
 CREATE USER 'asher'@'localhost' IDENTIFIED BY 'AmazingPassword2789';
