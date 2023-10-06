@@ -15,11 +15,13 @@
 	}
 	else
 	{
+		$originalContact = $inData["original"];
+		$updatedContact = $inData["new"];
 
 		$userEmail = isset($_SERVER['HTTP_SESSION_TOKEN']) ? $_SERVER['HTTP_SESSION_TOKEN'] : '';
 		// Check for preliminary contacts of those specifications
         $stmt = $conn->prepare("SELECT * FROM Contacts WHERE ContactUsername = ? AND ContactFirstName = ? AND ContactLastName = ? AND ContactEmail = ? AND ContactPhone = ? AND SourceUserEmail = ?;");
-		$stmt->bind_param("ssssss", $inData["newUsername"], $inData["newFirstName"], $inData["newLastName"], $inData["newEmail"], $inData["newPhoneNumber"], $userEmail);
+		$stmt->bind_param("ssssss", $updatedContact["username"], $updatedContact["firstName"], $updatedContact["lastName"], $updatedContact["email"], $updatedContact["phoneNumber"], $userEmail);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
@@ -39,7 +41,7 @@
 			$stmt->close();
 
 			$stmt = $conn->prepare("UPDATE Contacts SET ContactUsername = ?, ContactFirstName = ?, ContactLastName = ?, ContactEmail = ?, ContactPhone = ? WHERE ContactUsername = ? AND ContactFirstName = ? AND ContactLastName = ? AND ContactEmail = ? AND ContactPhone = ? AND SourceUserEmail = ?;");
-			$stmt->bind_param("sssssssssss", $inData["newUsername"], $inData["newFirstName"], $inData["newLastName"], $inData["newEmail"], $inData["newPhoneNumber"], $inData["username"], $inData["firstName"], $inData["lastName"], $inData["email"], $inData["phoneNumber"], $userEmail);
+			$stmt->bind_param("sssssssssss", $updatedContact["username"], $updatedContact["firstName"], $updatedContact["lastName"], $updatedContact["email"], $updatedContact["phoneNumber"], $originalContact["username"], $originalContact["firstName"], $originalContact["lastName"], $originalContact["email"], $originalContact["phoneNumber"], $userEmail);
 			$stmt->execute();
 			$result = $stmt->get_result();
 
@@ -48,7 +50,7 @@
 
 			// Check for newly set contact of those specifications
 			$stmt = $conn->prepare("SELECT * FROM Contacts WHERE ContactUsername = ? AND ContactFirstName = ? AND ContactLastName = ? AND ContactEmail = ? AND ContactPhone = ? AND SourceUserEmail = ?;");
-			$stmt->bind_param("ssssss", $inData["newUsername"], $inData["newFirstName"], $inData["newLastName"], $inData["newEmail"], $inData["newPhoneNumber"], $userEmail);
+			$stmt->bind_param("ssssss", $updatedContact["username"], $updatedContact["firstName"], $updatedContact["lastName"], $updatedContact["email"], $updatedContact["phoneNumber"], $userEmail);
 			$stmt->execute();
 			$result = $stmt->get_result();
 
