@@ -11,7 +11,7 @@
 	$searchResults = array();
 	$searchCount = 0;
 
-	$conn = new mysqli("localhost", "pandasaur", "izanagi", "COP4331_SLP19");
+	$conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
@@ -36,7 +36,7 @@
 		}
 		
 		$result = $stmt->get_result();
-		
+		$searchCount = 0;
 		while($row = $result->fetch_assoc())
 		{
 			$indData = array(
@@ -47,11 +47,13 @@
 				"phoneNumber"	=> $row["ContactPhone"]
 			);
 
-			$searchResults[] = $indData;
+			$searchResults[$searchCount] = $indData;
 			$searchCount++;
 
 		}
-		
+		// echo(implode(" ", $searchResults[0]));
+		// echo("\n");
+
 		if( $searchCount == 0 )
 		{
 			returnWithError( "No Records Found" );

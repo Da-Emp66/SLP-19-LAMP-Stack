@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Session-Token");
 
 	$inData = getRequestInfo();
 	
-	$conn = new mysqli("localhost", "pandasaur", "izanagi", "COP4331_SLP19"); 	
+	$conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19"); 	
 	if( $conn->connect_error )
 	{
 		returnWithError( $conn->connect_error );
