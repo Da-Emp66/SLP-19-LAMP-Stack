@@ -26,7 +26,7 @@ if ($conn->connect_error) {
         // Email doesn't exist, proceed with the insertion
         $stmt->close();
 
-        $stmt = $conn->prepare("INSERT INTO Users (FullName, Email, Pass) VALUES (?, ?, ?);");
+        $stmt = $conn->prepare("INSERT INTO Users (FullName, Email, Pass) VALUES (?, ?, SHA2(?,512));");
         $stmt->bind_param("sss", $inData["name"], $inData["email"], $inData["password"]);
         $stmt->execute();
 
