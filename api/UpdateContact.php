@@ -1,10 +1,8 @@
 <?php
 
-	header("Access-Control-Allow-Origin: http://localhost:3000");
-	header("Access-Control-Allow-Headers: Content-Type, Session-Token");
-	header("Access-Control-Allow-Methods: POST, OPTIONS");
-
 	require __DIR__ . '/HelperFunctions.php';
+
+	setCORS();
 
 	$inData = getRequestInfo();
 	
