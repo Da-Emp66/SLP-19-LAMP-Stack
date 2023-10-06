@@ -4,9 +4,14 @@ require __DIR__ . '/HelperFunctions.php';
 
 setCORS();
 
+$credentials = getEnvDatabaseInfo();
 $inData = getRequestInfo();
 
-$conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19");
+$id = 0;
+$name = "";
+$email = "";
+
+$conn = new mysqli($credentials["DB_HOST"], $credentials["DB_USER"], $credentials["DB_PASSWORD"], $credentials["DB_NAME"]);
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
