@@ -13,14 +13,12 @@ if( $conn->connect_error )
 }
 else
 {
-	$stmt = $conn->prepare("SELECT Email, Pass FROM Users WHERE Email =? AND Pass =?");
+	$stmt = $conn->prepare("SELECT Email, Pass FROM Users WHERE Email =? AND Pass =SHA2(?, 512)");
 	$stmt->bind_param("ss", $inData["email"], $inData["password"]);
 	$stmt->execute();
 	$result = mysqli_fetch_array($stmt->get_result());
 
 	$flag = ($result != NULL) ? array_key_exists("Email", $result) : false;
-
-	// echo $flag ? "T" : "F";
 
 	$found = false;
 	if ($flag) {
