@@ -20,8 +20,8 @@ CREATE TABLE COP4331_SLP19.Contacts (
     PRIMARY KEY (LinkID)
 );
 
-CREATE USER 'asher'@'localhost' IDENTIFIED BY 'AmazingPassword2789';
-GRANT ALL PRIVILEGES ON COP4331_SLP19.* TO 'asher'@'localhost' WITH GRANT OPTION;
+CREATE USER 'api'@'localhost' IDENTIFIED BY 'UltraSecretBackendPass2789';
+GRANT SELECT, INSERT, UPDATE, DELETE ON COP4331_SLP19.* TO 'api'@'localhost' WITH GRANT OPTION;
 
 -- INSERT INTO Users (FirstName,LastName,Username,Pass) VALUES ('Rick','Leinecker','RickL','COP4331');
 -- INSERT INTO Users (FirstName,LastName,Username,Pass) VALUES ('Sam','Hill','SamH','Test');
