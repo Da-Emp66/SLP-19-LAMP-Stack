@@ -17,6 +17,21 @@
 		}
 	}
 
+	function getEnvDatabaseInfo() {
+		require '../vendor/autoload.php';
+		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+		$dotenv->load();
+
+		$credentials = array(
+			"DB_HOST"		=> $_ENV["DB_HOST"],
+			"DB_NAME"		=> $_ENV["DB_NAME"],
+			"DB_USER"		=> $_ENV["DB_USER"],
+			"DB_PASSWORD"	=> $_ENV["DB_PASSWORD"]
+		);
+
+		return $credentials;
+	}
+
 	function getRequestInfo() {
 		$rawData = file_get_contents("php://input");
 		
