@@ -17,7 +17,7 @@ $conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19")
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
-    $stmt = $conn->prepare("INSERT INTO Users (FullName, Email, Pass) VALUES (?, ?, ?);");
+    $stmt = $conn->prepare("INSERT INTO Users (FullName, Email, Pass) VALUES (?, ?, SHA2(?, 512));");
     $stmt->bind_param("sss", $inData["name"], $inData["email"], $inData["password"]);
     $stmt->execute();
 
