@@ -10,7 +10,6 @@ $conn = new mysqli("localhost", "asher", "AmazingPassword2789", "COP4331_SLP19")
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
-
     $emailCheckQuery = "SELECT * FROM Users WHERE Email = ?";
     $stmt = $conn->prepare($emailCheckQuery);
     $stmt->bind_param("s", $inData["email"]);

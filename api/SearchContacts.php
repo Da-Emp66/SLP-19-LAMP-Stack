@@ -49,12 +49,10 @@
 			$searchCount++;
 
 		}
-		// echo(implode(" ", $searchResults[0]));
-		// echo("\n");
 
 		if( $searchCount == 0 )
 		{
-			returnWithError( "No Records Found" );
+			echo "[]";
 		}
 		else
 		{

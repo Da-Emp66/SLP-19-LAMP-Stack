@@ -20,8 +20,6 @@ else
 
 	$flag = ($result != NULL) ? array_key_exists("Email", $result) : false;
 
-	// echo $flag ? "T" : "F";
-
 	$found = false;
 	if ($flag) {
 		$found = ($result["Email"] === $inData["email"]) ? true : false;
