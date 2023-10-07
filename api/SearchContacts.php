@@ -17,22 +17,21 @@
 	} 
 	else
 	{
-		$searchCriteria = "%" . $inData . "%";
+		$searchInData = str_replace(" ", "|", $inData);
+		$lastCharacter = strlen($searchInData) - 1;
+
+		if ($searchInData[$lastCharacter] === '|')
+		{
+			$searchInData = substr($searchInData, 0, $lastCharacter);
+		}
+
+		$searchCriteria = "(" . $searchInData . ".*)";
 		$stmt;
 		$sourceEmail = isset($_SERVER["HTTP_SESSION_TOKEN"]) ? $_SERVER["HTTP_SESSION_TOKEN"] : '';
 
-		if ($searchCriteria == "%%")
-		{
-			$stmt = $conn->prepare("SELECT * FROM Contacts WHERE SourceUserEmail =?;");
-			$stmt->bind_param("s", $sourceEmail);
-			$stmt->execute();
-		}
-		else
-		{
-			$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (ContactUsername LIKE ? OR ContactFirstName LIKE ? OR ContactLastName LIKE ? OR ContactEmail LIKE ? OR ContactPhone LIKE ?) AND SourceUserEmail =?;");
-			$stmt->bind_param("ssssss", $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $sourceEmail);
-			$stmt->execute();
-		}
+		$stmt = $conn->prepare("SELECT * FROM Contacts WHERE (ContactUsername RLIKE ? OR ContactFirstName RLIKE ? OR ContactLastName RLIKE ? OR ContactEmail RLIKE ? OR ContactPhone RLIKE ?) AND SourceUserEmail =?;");
+		$stmt->bind_param("ssssss", $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $searchCriteria, $sourceEmail);
+		$stmt->execute();
 		
 		$result = $stmt->get_result();
 		$searchCount = 0;
