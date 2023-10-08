@@ -18,9 +18,9 @@
 	}
 
 	function getEnvDatabaseInfo() {
-		require '../vendor/autoload.php';
-		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
-		$dotenv->load();
+		// require '../vendor/autoload.php';
+		// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+		// $dotenv->load();
 
 		$credentials = array(
 			"DB_HOST"		=> getenv("DB_HOST"),
