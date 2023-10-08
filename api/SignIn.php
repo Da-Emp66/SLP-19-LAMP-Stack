@@ -29,8 +29,6 @@ else
 	if($found)
 	{
 		// Login Successful
-		$stmt->close();
-            
 		// Update DateLastLoggedIn to the current date and time
 		$updateQuery = "UPDATE Users SET DateLastLoggedIn = NOW() WHERE Email = ?";
 		$updateStmt = $conn->prepare($updateQuery);
@@ -43,10 +41,10 @@ else
 	}
 	else
 	{
-		$stmt->close();
-		$conn->close();
 		returnWithError("No Records Found");
 	}
+	$stmt->close();
+	$conn->close();
 
 }
 	
