@@ -23,10 +23,10 @@
 		$dotenv->load();
 
 		$credentials = array(
-			"DB_HOST"		=> $_ENV["DB_HOST"],
-			"DB_NAME"		=> $_ENV["DB_NAME"],
-			"DB_USER"		=> $_ENV["DB_USER"],
-			"DB_PASSWORD"	=> $_ENV["DB_PASSWORD"]
+			"DB_HOST"		=> getenv("DB_HOST"),
+			"DB_NAME"		=> getenv("DB_NAME"),
+			"DB_USER"		=> getenv("DB_USER"),
+			"DB_PASSWORD"	=> getenv("DB_PASSWORD")
 		);
 
 		return $credentials;
