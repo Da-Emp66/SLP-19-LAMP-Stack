@@ -20,9 +20,13 @@
 		$searchInData = str_replace(" ", "|", $inData);
 		$lastCharacter = strlen($searchInData) - 1;
 
-		if ($searchInData[$lastCharacter] === '|')
+		if ($lastCharacter > -1 && $searchInData[$lastCharacter] === '|')
 		{
 			$searchInData = substr($searchInData, 0, $lastCharacter);
+		}
+		else if ($lastCharacter === -1)
+		{
+			$searchInData = "";
 		}
 
 		$searchCriteria = "(" . $searchInData . ".*)";
