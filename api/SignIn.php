@@ -44,9 +44,9 @@ else
 	else
 	{
 		$stmt->close();
-		$conn->close();
 		returnWithError("No Records Found");
 	}
+	$conn->close();
 
 }
 	
