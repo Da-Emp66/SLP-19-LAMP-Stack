@@ -10,3 +10,5 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-composer
 
 Navigate to the root directory of this repo and run:
 `composer require vlucas/phpdotenv`
+
+Rename `.env.example` to `.env` and include database information (host, name, user, and password)
